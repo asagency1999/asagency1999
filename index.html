@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AS Agency | Delivery Hiring</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #0f172a;
+            --accent: #10b981;
+            --text-light: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --nav-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: var(--nav-height);
+            padding: 0 5%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav h2 {
+            font-weight: 800;
+            font-size: 26px;
+            background: linear-gradient(135deg, var(--primary), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            margin-left: 30px;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(255,255,255,0) 50%);
+            animation: rotateBG 15s infinite linear;
+        }
+
+        @keyframes rotateBG {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(18px, 2.5vw, 22px);
+            color: #e2e8f0;
+            margin-bottom: 30px;
+        }
+
+        .hero button {
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            background: white;
+            color: var(--primary-dark);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .hero button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Shared Container --- */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 50px;
+        }
+
+        /* --- Services --- */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        
+        .card-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- Form Section --- */
+        .form-wrapper {
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        form input {
+            width: 100%;
+            padding: 16px 16px 16px 50px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            font-size: 16px;
+            background: #f8fafc;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        form input[type="file"] {
+            padding: 14px 16px 14px 50px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+        
+        form input[type="file"]::file-selector-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            margin-right: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        form input[type="file"]::file-selector-button:hover {
+            background: var(--primary-dark);
+        }
+
+        form input::placeholder {
+            color: #94a3b8;
+        }
+
+        form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        form input:focus + i {
+            color: var(--primary);
+        }
+
+        form button {
+            width: 100%;
+            padding: 18px;
+            margin-top: 10px;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+
+        form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -10px var(--primary);
+        }
+
+        /* --- Contact Section --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .contact-text h4 {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .contact-text p {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 350px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        /* --- WhatsApp --- */
+        .whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            font-size: 28px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            animation: pulse-wa 2s infinite;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .whatsapp:hover {
+            transform: scale(1.1) translateY(-5px);
+            animation: none;
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        @keyframes pulse-wa {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--secondary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px;
+            margin-top: auto;
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            nav .nav-links { display: none; }
+            .hero h1 { font-size: 36px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .form-wrapper { padding: 30px 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <h2>AS Agency</h2>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#apply">Apply</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Delivery Jobs Available</h1>
+            <p>Join AS Agency and start earning today</p>
+            <button onclick="document.getElementById('apply').scrollIntoView()">
+                Apply Now
+            </button>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="container" id="services">
+        <h2 class="section-title">Why Work With Us</h2>
+        <div class="services">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <h3>Flexible Work</h3>
+                <p>Choose your own delivery schedule.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                <h3>High Earnings</h3>
+                <p>Earn competitive delivery income.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Fast Hiring</h3>
+                <p>Get hired quickly and start working.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPLICATION FORM -->
+    <section class="container" id="apply">
+        <h2 class="section-title">Online Job Application</h2>
+        <div class="form-wrapper">
+            <form action="send.php" method="POST" enctype="multipart/form-data">
+                
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email Address" required>
+                    <i class="fa-regular fa-envelope"></i>
+                </div>
+                
+                <div class="input-group">
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+                
+                <div class="input-group">
+                    <input type="file" name="resume" required accept=".pdf,.doc,.docx">
+                    <i class="fa-solid fa-file-arrow-up"></i>
+                </div>
+                
+                <button type="submit">Submit Application</button>
+                
+            </form>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="container" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-grid">
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fa-solid fa-phone-volume"></i></div>
+                    <div class="contact-text">
+                        <h4>Phone</h4>
+                        <p>83282 01200</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                    <div class="contact-text">
+                        <h4>Email</h4>
+                        <p>asagency1999@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <div class="contact-text">
+                        <h4>Location</h4>
+                        <p>Kondagattu, Mallial, Jagitial 505452</p>
+                    </div>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe
+                    loading="lazy"
+                    allowfullscreen
+                    src="https://maps.google.com/maps?q=Kondagattu%20Mallial%20Jagitial&t=&z=13&ie=UTF8&iwloc=&output=embed">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHATSAPP -->
+    <a class="whatsapp" href="https://wa.me/918328201200" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- FOOTER -->
+    <footer>
+        &copy; 2026 AS Agency | Delivery Hiring. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
